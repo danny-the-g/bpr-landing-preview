@@ -189,6 +189,58 @@ strong {
   }
 }
 
+/* ---------- deadline bar ---------- */
+
+.deadline-bar {
+  background: var(--surface-dark);
+  color: var(--ink-inverse);
+  padding: 10px 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.deadline-bar .label {
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted-inverse);
+  font-weight: 700;
+  font-size: 0.76rem;
+}
+
+.deadline-bar .units {
+  display: flex;
+  gap: 6px;
+}
+
+.deadline-bar .unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: oklch(0.20 0.012 268);
+  border-radius: 4px;
+  padding: 3px 9px;
+  min-width: 40px;
+}
+
+.deadline-bar .unit b {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: var(--accent);
+  line-height: 1.3;
+}
+
+.deadline-bar .unit span {
+  font-size: 0.58rem;
+  color: var(--muted-inverse);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
 /* ---------- nav ---------- */
 
 .nav {
@@ -230,9 +282,9 @@ strong {
   min-height: clamp(520px, 82vh, 860px);
   display: flex;
   align-items: flex-end;
-  background-image: url("https://images.pexels.com/photos/6270266/pexels-photo-6270266.jpeg?cs=srgb&dl=pexels-artempodrez-6270266.jpg&fm=jpg&w=1920");
+  background-image: url("https://images.pexels.com/photos/8761330/pexels-photo-8761330.jpeg?cs=srgb&dl=pexels-pavel-danilyuk-8761330.jpg&fm=jpg&w=1920");
   background-size: cover;
-  background-position: center 30%;
+  background-position: center 35%;
   background-color: oklch(0.11 0.012 268);
   overflow: hidden;
 }

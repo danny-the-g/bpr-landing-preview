@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Blueprint Reloaded (BPR) — Daily Vocal Training, $47/mo</title>
-<meta name="description" content="5 live group vocal training calls a week, inside one WhatsApp room, for $47/month. Untangling drills, projection work, free association, vocal stretch, and more." />
+<meta name="description" content="5 live group vocal training calls a week, inside one private room, for $47/month. Untangling drills, projection work, free association, vocal stretch, and more." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -16,27 +16,43 @@
   ============================================================
   BEFORE THIS GOES LIVE, edit these things:
 
-  1. HERO PHOTO
-     Currently a free Pexels stock photo (photographer: Artem
-     Podrez, pexels.com/photo/6270266, no attribution required)
-     referenced directly from Pexels' CDN in assets/styles.css
-     under .hero { background-image: ... }. Fine to ship with, but
-     swap in a real photo of your own community/training once you
-     have one, hosted from your own domain rather than hotlinked,
-     for reliability. Match the layout in DESIGN.md (full-bleed,
-     dark scrim for text legibility).
+  1. HERO PHOTO — REPLACE WITH OWEN COOK PHOTO
+     Currently a free Pexels stock photo of a generic seminar
+     speaker (photographer: Pavel Danilyuk, pexels.com/photo/8761330,
+     no attribution required), standing in until a real photo of
+     Owen Cook leading a seminar is supplied. Referenced directly
+     from Pexels' CDN in assets/styles.css under
+     .hero { background-image: ... }. Swap that URL for the real
+     photo (self-hosted, not hotlinked, once you have it) and
+     update/remove the "Stock photo" corner tag below.
 
-  2. STRIPE PAYMENT LINK
+  2. COUNTDOWN DEADLINE
+     Set in assets/main.js as DEADLINE. Currently July 24, 2026,
+     11:59:59 PM in the visitor's local time. Update this if the
+     offer window changes, and remove the deadline-bar entirely if
+     the countdown ever needs to come down.
+
+  3. STRIPE PAYMENT LINK
      Every button below with href="#STRIPE_LINK_PLACEHOLDER" needs
      your real Stripe Payment Link (buy.stripe.com/...).
      In Stripe: set the Payment Link's "After payment" redirect to
      your deployed thank-you.html URL.
 
-  3. PLACEHOLDER CONTENT
+  4. PLACEHOLDER CONTENT
      Search this file for "PLACEHOLDER" to find the 3 bonus
      products and testimonial that need real content/values.
   ============================================================
 -->
+
+<div class="deadline-bar">
+  <span class="label">Offer closes in</span>
+  <span class="units">
+    <span class="unit"><b id="cd-days">00</b><span>Days</span></span>
+    <span class="unit"><b id="cd-hours">00</b><span>Hrs</span></span>
+    <span class="unit"><b id="cd-mins">00</b><span>Min</span></span>
+    <span class="unit"><b id="cd-secs">00</b><span>Sec</span></span>
+  </span>
+</div>
 
 <nav class="nav">
   <div class="wrap">
@@ -46,10 +62,10 @@
 </nav>
 
 <header class="hero">
-  <span class="hero-photo-tag">Stock photo — swap for your own when ready</span>
+  <span class="hero-photo-tag">Stock photo — swap for Owen's seminar photo when ready</span>
   <div class="wrap hero-content">
-    <div class="eyebrow-line">$47 / month · WhatsApp community</div>
-    <h1>5 live calls a week. One WhatsApp group. No excuses.</h1>
+    <div class="eyebrow-line">$47 / month · Private community</div>
+    <h1>5 live calls a week. One private group. No excuses.</h1>
     <p class="lede">
       Blueprint Reloaded is a daily training room for singers who actually
       want to get better, not just collect tutorials. Untangling drills,
@@ -60,7 +76,7 @@
       <a class="btn btn-cta" href="#STRIPE_LINK_PLACEHOLDER">Join BPR — $47/mo</a>
       <a class="btn btn-on-dark" href="#stack">See what's included</a>
     </div>
-    <p class="hero-fineprint">Cancel anytime. Billed monthly. Instant WhatsApp invite after checkout.</p>
+    <p class="hero-fineprint">Cancel anytime. Billed monthly. Instant access after checkout.</p>
   </div>
 </header>
 
@@ -74,7 +90,7 @@
       </div>
       <div class="icon-row-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-        <h3>Just WhatsApp</h3>
+        <h3>One link, you're in</h3>
         <p>No app to download, no dashboard to log into. You're already set up.</p>
       </div>
       <div class="icon-row-item">
@@ -116,7 +132,7 @@
   <div class="wrap">
     <div class="section-head reveal">
       <h2>What's inside the room</h2>
-      <p class="lede">No app to download. No dashboard to log into. You're added to one WhatsApp group and you train.</p>
+      <p class="lede">No app to download. No dashboard to log into. You're added to one private group and you train.</p>
     </div>
     <div class="inside-layout">
       <ul class="drill-list reveal">
@@ -145,7 +161,7 @@
         <div class="cadence-figure">5x</div>
         <p><strong>Live group exercise calls, every single week.</strong> Multiple students on every call, training the same drills at the same time.</p>
         <ul class="cadence-list">
-          <li>All calls run inside the BPR WhatsApp group</li>
+          <li>All calls run inside the BPR private group</li>
           <li>Pay, get an automatic invite, and you're in the room</li>
           <li>Cancel anytime, no lock-in contract</li>
         </ul>
@@ -208,7 +224,7 @@
         <div class="value">$1,997/mo</div>
       </li>
       <li class="stack-row">
-        <div class="label">Daily WhatsApp accountability
+        <div class="label">Daily group accountability
           <span class="sub">One room, no scheduling, no app to check</span>
         </div>
         <div class="value">$197/mo</div>
@@ -273,7 +289,7 @@
       <div class="step">
         <div class="step-badge">2</div>
         <h3>Get your invite</h3>
-        <p>An automatic WhatsApp invite lands right after checkout. No waiting.</p>
+        <p>An automatic invite lands right after checkout. No waiting.</p>
       </div>
       <div class="step">
         <div class="step-badge">3</div>
@@ -300,7 +316,7 @@
       </details>
       <details>
         <summary>Do I need to download anything?</summary>
-        <p>No. Everything runs in WhatsApp, which you almost certainly already have installed. Pay, get your invite, and you're in the group.</p>
+        <p>No. Everything runs through a single invite link. Pay, get your invite, and you're in the group.</p>
       </details>
       <details>
         <summary>What level do I need to be at?</summary>
