@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>You're in — Blueprint Reloaded</title>
+<meta name="robots" content="noindex" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+
+<!--
+  ============================================================
+  SET THIS AS YOUR STRIPE PAYMENT LINK'S "AFTER PAYMENT" REDIRECT.
+
+  Before this goes live, edit the WHATSAPP_INVITE_PLACEHOLDER
+  href below to your real WhatsApp group invite link
+  (https://chat.whatsapp.com/xxxxxxxx).
+
+  Note on automation: this page gives every buyer the same
+  static group-invite link right after Stripe checkout, which is
+  the simplest working version of "automated." It does not
+  remove people if they later cancel their subscription, and it
+  does not generate a unique link per buyer. True automation
+  (auto-remove on churn, unique invite tracking) needs the
+  WhatsApp Business API wired to Stripe webhooks, which is a
+  separate build if you want it later.
+  ============================================================
+-->
+
+<main class="ty-screen">
+  <div class="ty-card">
+    <span class="eyebrow-line">PAYMENT CONFIRMED</span>
+    <h1>You're in the room.</h1>
+    <p class="lede">One tap and you're inside the Blueprint Reloaded WhatsApp group. Calls run 5 times a week, drop your first message and say you're new.</p>
+
+    <a class="btn btn-cta btn-block" href="https://chat.whatsapp.com/WHATSAPP_INVITE_PLACEHOLDER">Join the WhatsApp group</a>
+
+    <ul class="ty-steps">
+      <li>1. Tap the button above to open WhatsApp.</li>
+      <li>2. Confirm you want to join the group.</li>
+      <li>3. Introduce yourself, the next call is coming up this week.</li>
+    </ul>
+
+    <p class="hero-fineprint">Trouble joining? Reply to your Stripe receipt email and we'll get you added directly.</p>
+  </div>
+</main>
+
+</body>
+</html>
