@@ -16,15 +16,14 @@
   ============================================================
   BEFORE THIS GOES LIVE, edit these things:
 
-  1. HERO PHOTO — REPLACE WITH OWEN COOK PHOTO
-     Currently a free Pexels stock photo of a generic seminar
-     speaker (photographer: Pavel Danilyuk, pexels.com/photo/8761330,
-     no attribution required), standing in until a real photo of
-     Owen Cook leading a seminar is supplied. Referenced directly
-     from Pexels' CDN in assets/styles.css under
-     .hero { background-image: ... }. Swap that URL for the real
-     photo (self-hosted, not hotlinked, once you have it) and
-     update/remove the "Stock photo" corner tag below.
+  1. HERO PHOTO
+     Now a real Owen Cook seminar photo (assets/img/owen-hero.jpg),
+     cropped from the Endless Motivation site. Set in assets/styles.css
+     under .hero::before { background-image: ... }. Bonus 1 cover
+     (assets/img/endless-motivation-cover.png) is also the real product
+     image. Both are Owen Cook / Self Mastery Co assets: use is fine
+     given Owen is approving the bundle. Bonus 2 and 3 covers are still
+     placeholders.
 
   2. COUNTDOWN DEADLINE
      Set in assets/main.js as DEADLINE. Currently July 24, 2026,
@@ -62,7 +61,6 @@
 </nav>
 
 <header class="hero">
-  <span class="hero-photo-tag">Stock photo — swap for Owen's seminar photo</span>
   <div class="wrap">
     <div class="hero-copy">
       <div class="eyebrow-line">$47 / month &middot; Private community</div>
@@ -220,12 +218,12 @@
     </div>
     <div class="bonus-grid">
 
-      <!-- Bonus 1: real product, cover image still needed — see PLACEHOLDER note -->
+      <!-- Bonus 1: Endless Motivation 2.0 — real product cover + copy from endlessmotivationblueprint.com -->
       <div class="bonus-card reveal">
         <span class="bonus-tag">Bonus 1</span>
-        <div class="bonus-image-placeholder">PLACEHOLDER — add cover image</div>
-        <h3>Endless Motivation 2.0</h3>
-        <p>A motivation and identity reboot curriculum. Built for procrastination, low drive, and not waking up excited to put yourself out there.</p>
+        <img class="bonus-cover" src="assets/img/endless-motivation-cover.png" alt="Endless Motivation 2.0: Evolution course package" loading="lazy" />
+        <h3>Endless Motivation 2.0: Evolution</h3>
+        <p>Owen's motivation and identity reboot. Dissolve procrastination and resistance, find your own natural reasons to wake up fired up, and flip motivation on like a switch, without to-do lists, 5am alarms, or willpower. Includes Social Skills, Business Building, and Inner Self Mastery masterclasses.</p>
         <div class="bonus-value">Value: $5,997</div>
       </div>
 

@@ -165,8 +165,8 @@ strong { color: inherit; font-weight: 700; }
 .hero::before {
   content: "";
   position: absolute; inset: 0;
-  background-image: url("https://images.pexels.com/photos/8761330/pexels-photo-8761330.jpeg?cs=srgb&dl=pexels-pavel-danilyuk-8761330.jpg&fm=jpg&w=1920");
-  background-size: cover; background-position: center 32%;
+  background-image: url("img/owen-hero.jpg");
+  background-size: cover; background-position: center 28%;
 }
 .hero::after {
   content: "";
@@ -267,6 +267,7 @@ strong { color: inherit; font-weight: 700; }
 .bonus-card { background: var(--paper); border: 1px solid var(--border); border-radius: 10px; padding: 26px; display: flex; flex-direction: column; gap: 12px; box-shadow: var(--shadow-card); }
 .bonus-tag { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent-on); background: var(--accent); display: inline-block; padding: 5px 11px; border-radius: 4px; width: fit-content; }
 .bonus-image-placeholder { aspect-ratio: 16/9; width: 100%; border: 1px dashed var(--silver); border-radius: 6px; background: var(--surface-light); display: flex; align-items: center; justify-content: center; text-align: center; color: var(--neutral-dim); font-size: 0.76rem; font-weight: 700; padding: 12px; }
+.bonus-cover { aspect-ratio: 16/9; width: 100%; object-fit: contain; border-radius: 6px; background: var(--primary-dark); padding: 8px; }
 .bonus-card h3 { margin-top: 4px; color: var(--ink); }
 .bonus-card p { color: var(--muted); font-size: 0.95rem; flex-grow: 1; }
 .bonus-value { font-weight: 800; color: var(--ink); border-top: 1px solid var(--border); padding-top: 12px; font-size: 1rem; }
