@@ -1,8 +1,15 @@
 document.documentElement.classList.add("js");
 
-// Countdown: set to your real deadline. Currently July 24, 2026, 11:59:59 PM
-// in the visitor's local timezone (no explicit UTC offset).
-const DEADLINE = new Date("2026-07-24T23:59:59");
+// Countdown: rolls to 11:59:59 PM on the last day of the current month, in
+// the visitor's local timezone. Automatically re-targets the next month once
+// the current one passes, so the "closes end of month" offer never shows 00.
+function endOfMonth() {
+  const now = new Date();
+  let end = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59);
+  if (end - now <= 0) end = new Date(now.getFullYear(), now.getMonth() + 2, 0, 23, 59, 59);
+  return end;
+}
+const DEADLINE = endOfMonth();
 
 function updateCountdown() {
   const daysEl = document.getElementById("cd-days");

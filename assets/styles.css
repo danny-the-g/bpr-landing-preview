@@ -291,6 +291,28 @@ strong { color: inherit; font-weight: 700; }
 .price-panel .btn-cta { background: #fff; color: var(--accent-dark); box-shadow: none; }
 .price-panel .btn-cta:hover { background: #f0f0f0; }
 
+/* ---------- meet owen (authority) ---------- */
+
+.founder { background: var(--primary); color: #fff; }
+.founder .wrap { display: grid; grid-template-columns: 440px 1fr; gap: clamp(28px, 5vw, 60px); align-items: center; }
+@media (max-width: 880px) { .founder .wrap { grid-template-columns: 1fr; } }
+.founder-photo { border: 3px solid rgba(255,255,255,0.14); box-shadow: var(--shadow-floating); width: 100%; aspect-ratio: 4/3; object-fit: cover; object-position: center 30%; }
+.founder h2 { color: #fff; margin-bottom: 8px; }
+.founder .role { color: var(--accent-light); font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.82rem; margin: 0 0 18px; }
+.founder p { color: var(--muted-inverse); margin-bottom: 14px; }
+.founder-stats { list-style: none; margin: 24px 0 0; padding: 22px 0 0; border-top: 1px solid var(--border-dark); display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 20px; }
+.founder-stats b { font-family: var(--font-heading); font-weight: 700; font-size: 1.9rem; color: var(--accent-light); display: block; line-height: 1; }
+.founder-stats span { color: var(--muted-inverse); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.03em; }
+
+/* ---------- guarantee band ---------- */
+
+.guarantee { background: var(--surface-light); }
+.guarantee .wrap { display: flex; align-items: center; gap: clamp(20px, 4vw, 40px); }
+@media (max-width: 700px) { .guarantee .wrap { flex-direction: column; text-align: center; } }
+.guarantee .seal { flex: none; width: 84px; height: 84px; border-radius: 50%; border: 3px solid var(--accent); color: var(--accent); display: flex; align-items: center; justify-content: center; font-family: var(--font-heading); font-weight: 700; font-size: 0.72rem; line-height: 1; text-align: center; text-transform: uppercase; }
+.guarantee h3 { color: var(--ink); margin-bottom: 8px; }
+.guarantee p { color: var(--muted); margin: 0; }
+
 /* ---------- stars ---------- */
 
 .stars { display: inline-flex; gap: 4px; color: var(--accent); }
