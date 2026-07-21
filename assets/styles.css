@@ -318,7 +318,13 @@ strong { color: inherit; font-weight: 700; }
 .stars { display: inline-flex; gap: 4px; color: var(--accent); }
 .stars svg { width: 24px; height: 24px; }
 
-/* ---------- testimonial ---------- */
+/* ---------- testimonials ---------- */
+
+.testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 22px; }
+.tcard { background: var(--paper); border: 1px solid var(--border); border-radius: 10px; padding: 26px; box-shadow: var(--shadow-card); text-align: left; }
+.tcard .stars { margin-bottom: 12px; }
+.tcard blockquote { margin: 0 0 16px; color: var(--ink); font-size: 1.02rem; line-height: 1.6; }
+.tcard cite { font-style: normal; font-weight: 800; color: var(--neutral-dim); font-size: 0.86rem; }
 
 .testimonial-band { text-align: center; }
 .testimonial-band .stars { justify-content: center; margin-bottom: 20px; }
