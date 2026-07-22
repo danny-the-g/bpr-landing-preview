@@ -175,8 +175,8 @@ strong { color: inherit; font-weight: 700; }
 }
 @media (max-width: 960px) {
   .hero .wrap { grid-template-columns: 1fr; }
-  /* Owen sits on the right of the photo, so shift the crop right on narrow screens */
-  .hero::before { background-position: 82% 22%; }
+  /* Owen sits on the right of the photo, so pin the crop to the right edge on narrow screens */
+  .hero::before { background-position: 100% 20%; }
 }
 
 .hero-photo-tag {
@@ -228,6 +228,14 @@ strong { color: inherit; font-weight: 700; }
 .icon-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: clamp(28px, 4vw, 52px); text-align: center; }
 .icon-row-item { display: flex; flex-direction: column; align-items: center; }
 .icon-row-item svg { width: 34px; height: 34px; color: var(--accent); margin-bottom: 16px; }
+.icon-row-item .icon-wa { width: 40px; height: 40px; object-fit: contain; margin-bottom: 16px; }
+
+/* WhatsApp glyph on every primary CTA (so we can judge fit) */
+.btn-cta::before {
+  content: "";
+  width: 20px; height: 20px; flex: none;
+  background: url("img/whatsapp-icon.png") center / contain no-repeat;
+}
 .icon-row-item h3 { margin-bottom: 10px; font-size: 1.1rem; color: var(--ink); }
 .icon-row-item p { font-size: 0.95rem; max-width: 32ch; }
 
