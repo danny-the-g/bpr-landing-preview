@@ -87,6 +87,8 @@ p { color: var(--muted); max-width: 65ch; text-wrap: pretty; }
 .lede { font-size: clamp(1.05rem, 1.5vw, 1.25rem); color: var(--muted); line-height: 1.65; }
 strong { color: inherit; font-weight: 700; }
 .accent-word { color: var(--accent); }
+.hl-orange { color: var(--accent); }
+.hl-teal { color: var(--teal); }
 
 /* ---------- buttons ---------- */
 
