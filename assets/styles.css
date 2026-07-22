@@ -16,6 +16,11 @@
   --accent-dark: #cc5b00;    /* rgb 204 91 0  */
   --accent-on: #ffffff;
 
+  /* emphasis / highlight colors, distinct from navy + orange */
+  --teal: #0e8f82;           /* benefit headings on light surfaces */
+  --teal-bright: #32d3c1;    /* on dark surfaces */
+  --gold: #f2c14e;           /* on dark surfaces */
+
   --paper: #ffffff;
   --surface-light: #f4f6f9;
   --neutral: #94a3b8;
@@ -110,22 +115,7 @@ strong { color: inherit; font-weight: 700; }
 .btn-cta { background: var(--accent); color: var(--accent-on); box-shadow: var(--shadow-floating); }
 .btn-cta:hover { background: var(--accent-dark); }
 
-/* pulsing glow behind the primary CTA, like the factory hero button */
-.btn-pulse { position: relative; isolation: isolate; }
-.btn-pulse::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  border-radius: var(--radius);
-  background: var(--accent);
-  animation: ctaPulse 2.2s ease-in-out infinite;
-}
-@keyframes ctaPulse {
-  0%, 100% { opacity: 0.5; transform: scale(1); }
-  50% { opacity: 0; transform: scale(1.22); }
-}
-@media (prefers-reduced-motion: reduce) { .btn-pulse::before { animation: none; opacity: 0; } }
+/* (pulse animation removed: read as cheap urgency) */
 
 .btn-secondary { background: var(--paper); border-color: var(--ink); color: var(--ink); box-shadow: none; }
 .btn-secondary:hover { background: var(--surface-light); }
@@ -183,7 +173,11 @@ strong { color: inherit; font-weight: 700; }
   display: grid; grid-template-columns: 1fr 380px; gap: clamp(28px, 4vw, 56px); align-items: center;
   padding-top: clamp(64px, 9vw, 120px); padding-bottom: clamp(64px, 9vw, 120px);
 }
-@media (max-width: 960px) { .hero .wrap { grid-template-columns: 1fr; } }
+@media (max-width: 960px) {
+  .hero .wrap { grid-template-columns: 1fr; }
+  /* Owen sits on the right of the photo, so shift the crop right on narrow screens */
+  .hero::before { background-position: 82% 22%; }
+}
 
 .hero-photo-tag {
   position: absolute; top: 12px; right: 12px; z-index: 2;
@@ -196,9 +190,15 @@ strong { color: inherit; font-weight: 700; }
 .hero h1 { color: #fff; margin-bottom: 18px; }
 .hero .lede { color: rgba(255,255,255,0.88); margin-bottom: 22px; max-width: 44ch; }
 
-.trust-chips { list-style: none; margin: 0 0 28px; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 22px; }
-.trust-chips li { display: flex; align-items: center; gap: 9px; font-size: 0.82rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: rgba(255,255,255,0.9); }
-.trust-chips li::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); flex: none; }
+.trust-chips { list-style: none; margin: 0 0 28px; padding: 0; display: flex; flex-wrap: wrap; gap: 10px 26px; }
+.trust-chips li { display: flex; align-items: center; gap: 10px; font-size: 1.02rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; }
+.trust-chips li::before { content: ""; width: 9px; height: 9px; border-radius: 50%; flex: none; }
+.trust-chips li:nth-child(1) { color: var(--accent-light); }
+.trust-chips li:nth-child(1)::before { background: var(--accent-light); }
+.trust-chips li:nth-child(2) { color: var(--teal-bright); }
+.trust-chips li:nth-child(2)::before { background: var(--teal-bright); }
+.trust-chips li:nth-child(3) { color: var(--gold); }
+.trust-chips li:nth-child(3)::before { background: var(--gold); }
 
 .hero-ctas { display: flex; flex-wrap: wrap; align-items: center; gap: 20px; }
 .hero-ctas .textlink { color: #fff; font-weight: 700; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
@@ -255,7 +255,7 @@ strong { color: inherit; font-weight: 700; }
 .drill-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
 .drill-list li { padding: 18px 0; border-bottom: 1px solid var(--border); }
 .drill-list li:last-child { border-bottom: none; }
-.drill-name { font-weight: 800; color: var(--ink); font-size: 1.08rem; display: block; margin-bottom: 5px; }
+.drill-name { font-weight: 800; color: var(--teal); font-size: 1.1rem; display: block; margin-bottom: 5px; }
 .drill-desc { color: var(--muted); font-size: 0.95rem; margin: 0; }
 
 .cadence-card { background: var(--primary-dark); padding: clamp(26px, 4vw, 40px); border-radius: 10px; border-top: 4px solid var(--accent); }
