@@ -79,7 +79,8 @@ h1, h2, h3 {
   margin: 0;
 }
 
-h1 { font-size: clamp(2.4rem, 5.5vw, 4rem); }
+h1 { font-size: clamp(2.4rem, 5.5vw, 4rem); overflow-wrap: break-word; }
+@media (max-width: 480px) { h1 { font-size: clamp(1.9rem, 8.2vw, 2.4rem); } }
 h2 { font-size: clamp(1.9rem, 3.8vw, 3rem); }
 h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); line-height: 1.15; }
 
@@ -167,8 +168,8 @@ strong { color: inherit; font-weight: 700; }
   content: "";
   position: absolute; inset: 0;
   background:
-    linear-gradient(180deg, rgba(6,37,63,0.60), rgba(6,37,63,0.72)),
-    linear-gradient(90deg, rgba(6,37,63,0.92) 0%, rgba(6,37,63,0.55) 45%, rgba(6,37,63,0.15) 100%);
+    linear-gradient(180deg, rgba(6,37,63,0.70), rgba(6,37,63,0.80)),
+    linear-gradient(90deg, rgba(6,37,63,0.94) 0%, rgba(6,37,63,0.72) 45%, rgba(6,37,63,0.35) 100%);
 }
 .hero .wrap {
   position: relative; z-index: 1;
@@ -191,6 +192,11 @@ strong { color: inherit; font-weight: 700; }
 
 .hero h1 { color: #fff; margin-bottom: 18px; }
 .hero .lede { color: rgba(255,255,255,0.88); margin-bottom: 22px; max-width: 44ch; }
+
+/* hero old-way / new-way bullet points */
+.hero-points { list-style: none; margin: 0 0 26px; padding: 0; display: flex; flex-direction: column; gap: 14px; max-width: 46ch; }
+.hero-points li { position: relative; padding-left: 22px; color: rgba(255,255,255,0.94); font-size: clamp(1rem, 1.4vw, 1.15rem); line-height: 1.55; text-shadow: 0 1px 12px rgba(6,37,63,0.75); }
+.hero-points li::before { content: ""; position: absolute; left: 0; top: 0.6em; width: 9px; height: 9px; border-radius: 50%; background: var(--accent); }
 
 .trust-chips { list-style: none; margin: 0 0 28px; padding: 0; display: flex; flex-wrap: wrap; gap: 10px 26px; }
 .trust-chips li { display: flex; align-items: center; gap: 10px; font-size: 1.02rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; }
@@ -262,6 +268,21 @@ strong { color: inherit; font-weight: 700; }
 
 .inside-layout { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 5vw, 56px); align-items: start; }
 @media (max-width: 860px) { .inside-layout { grid-template-columns: 1fr; } }
+
+/* "What's inside" drills: 2-column drill list + cadence card sidebar (fills white space, shorter page).
+   Collapses to a single column on mobile, keeping the drills-then-card order unchanged. */
+.drills-cols { display: grid; grid-template-columns: 1fr 340px; gap: clamp(28px, 4vw, 48px); align-items: start; }
+.drills-cols .drill-list { display: block; columns: 2; column-gap: 44px; }
+.drills-cols .drill-list li { break-inside: avoid; }
+@media (max-width: 900px) {
+  .drills-cols { grid-template-columns: 1fr; }
+  .drills-cols .drill-list { columns: 1; }
+}
+
+/* Benefits: one auto-balanced two-column list (even columns, no mobile gap). */
+.benefits-cols .drill-list { display: block; columns: 2; column-gap: clamp(28px, 5vw, 56px); }
+.benefits-cols .drill-list li { break-inside: avoid; }
+@media (max-width: 760px) { .benefits-cols .drill-list { columns: 1; } }
 .drill-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
 .drill-list li { padding: 18px 0; border-bottom: 1px solid var(--border); }
 .drill-list li:last-child { border-bottom: none; }
