@@ -81,6 +81,8 @@ h1, h2, h3 {
 
 h1 { font-size: clamp(2.4rem, 5.5vw, 4rem); overflow-wrap: break-word; }
 @media (max-width: 480px) { h1 { font-size: clamp(1.9rem, 8.2vw, 2.4rem); } }
+/* keep "One private community." on one line on desktop only */
+@media (min-width: 700px) { .hero h1 .h1-line2 { white-space: nowrap; } }
 h2 { font-size: clamp(1.9rem, 3.8vw, 3rem); }
 h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); line-height: 1.15; }
 
@@ -168,8 +170,8 @@ strong { color: inherit; font-weight: 700; }
   content: "";
   position: absolute; inset: 0;
   background:
-    linear-gradient(180deg, rgba(6,37,63,0.70), rgba(6,37,63,0.80)),
-    linear-gradient(90deg, rgba(6,37,63,0.94) 0%, rgba(6,37,63,0.72) 45%, rgba(6,37,63,0.35) 100%);
+    linear-gradient(180deg, rgba(6,37,63,0.52), rgba(6,37,63,0.64)),
+    linear-gradient(90deg, rgba(6,37,63,0.88) 0%, rgba(6,37,63,0.56) 45%, rgba(6,37,63,0.22) 100%);
 }
 .hero .wrap {
   position: relative; z-index: 1;
