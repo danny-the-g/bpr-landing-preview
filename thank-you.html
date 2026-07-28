@@ -16,17 +16,18 @@
   ============================================================
   SET THIS AS YOUR STRIPE PAYMENT LINK'S "AFTER PAYMENT" REDIRECT.
 
-  Before this goes live, edit the WHATSAPP_INVITE_PLACEHOLDER
-  href below to your real WhatsApp group invite link
-  (https://chat.whatsapp.com/xxxxxxxx).
+  The join button below points to the live WhatsApp Community
+  invite link. To change it later, edit the href on the
+  "Request to join the community" button.
 
   Intended flow (Option A, no backend):
   - Stripe collects the buyer's WhatsApp number at checkout
     (phone field + a required "WhatsApp number" custom field).
-  - This page shows the group invite link after payment.
-  - The WhatsApp group has "Approve new participants" turned ON,
-    so a leaked link cannot get anyone in. An admin approves each
-    request only if the requesting number matches a paid customer.
+  - This page shows the community invite link after payment.
+  - The community's announcement group has "Approve new members"
+    turned ON, so a leaked link cannot get anyone in. An admin
+    approves each request only if the requesting number matches a
+    paid customer.
   - Churn removal is manual for now: Stripe shows who lapsed, an
     admin removes them from the group.
 
@@ -45,7 +46,7 @@
     <h1>You're in the community.</h1>
     <p class="lede">You're one tap from the Blueprint Reloaded Community. Requests are approved by an admin, usually within a few hours, then you're in. Group coaching exercise calls run 5 times a week.</p>
 
-    <a class="btn btn-cta btn-block" href="https://chat.whatsapp.com/WHATSAPP_INVITE_PLACEHOLDER">Request to join the community</a>
+    <a class="btn btn-cta btn-block" href="https://chat.whatsapp.com/IFTjkXf7kz97Ze74YDvQQq">Request to join the community</a>
 
     <ul class="ty-steps">
       <li>1. Tap the button above and request to join.</li>
