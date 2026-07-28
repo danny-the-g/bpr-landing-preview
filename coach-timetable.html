@@ -110,14 +110,10 @@
       <label>Actions</label>
       <div class="btn-row">
         <button class="btn" id="refreshBtn">Refresh</button>
-        <button class="btn" id="summaryBtn">Copy as text</button>
-        <button class="btn editor-only" id="exportBtn">Export</button>
-        <button class="btn editor-only" id="importBtn">Import</button>
-        <button class="btn ghost editor-only" id="clearBtn">Clear all</button>
+        <button class="btn dark editor-only" id="copyLinkBtn">Copy student link</button>
       </div>
     </div>
     <div class="status" id="status"></div>
-    <input type="file" id="importFile" accept="application/json" hidden />
   </div>
 
   <div class="coaches">
@@ -134,17 +130,6 @@
     Each cell is a 30-minute slot. Times are stored once and converted for whichever timezone you pick, so a coach sets availability in their own timezone and everyone else sees it in theirs.
     Conversions use the current week, so around daylight-saving changes double-check the hour.
   </p>
-</div>
-
-<div class="modal-bg" id="modalBg">
-  <div class="modal">
-    <header><h3 id="modalTitle">Schedule</h3><button class="x" id="modalClose">&times;</button></header>
-    <div class="body"><textarea id="modalText" readonly></textarea></div>
-    <div class="foot">
-      <button class="btn" id="copyText">Copy to clipboard</button>
-      <button class="btn dark" id="modalDone">Done</button>
-    </div>
-  </div>
 </div>
 
 <script>
@@ -378,41 +363,14 @@
   }
   tzSel.addEventListener("change", function () { viewTz = tzSel.value; saveLocalPrefs(); renderGrid(); });
 
-  // ---- summary / export / import ----
-  function buildSummary() {
-    var byDay = {}, k, i;
-    for (k in state.blocks) {
-      var pos = weeklyToCell(+k, viewTz), ids = state.blocks[k];
-      for (i = 0; i < ids.length; i++) { byDay[pos.day] = byDay[pos.day] || {}; (byDay[pos.day][ids[i]] = byDay[pos.day][ids[i]] || []).push(pos.slot); }
-    }
-    function fmt(s) { var h = Math.floor(s / 2), m = (s % 2) * 30; return (h < 10 ? "0" + h : h) + ":" + (m === 0 ? "00" : "30"); }
-    function ranges(slots) { slots.sort(function (a, b) { return a - b; }); var out = [], st = slots[0], pv = slots[0], j; for (j = 1; j < slots.length; j++) { if (slots[j] === pv + 1) { pv = slots[j]; continue; } out.push(fmt(st) + "-" + fmt(pv + 1)); st = pv = slots[j]; } out.push(fmt(st) + "-" + fmt(pv + 1)); return out; }
-    var lines = ["BPR exercise call schedule", "Times in " + viewTz.replace(/_/g, " "), ""], d;
-    for (d = 0; d < 7; d++) { if (!byDay[d]) continue; lines.push(DAYS[d]); state.coaches.forEach(function (c) { if (byDay[d][c.id]) lines.push("  " + c.name + ": " + ranges(byDay[d][c.id]).join(", ")); }); lines.push(""); }
-    if (lines.length === 3) lines.push("(no calls scheduled yet)");
-    return lines.join("\n");
-  }
-  var modalBg = document.getElementById("modalBg"), modalText = document.getElementById("modalText"), modalTitle = document.getElementById("modalTitle");
-  function openModal(t, x) { modalTitle.textContent = t; modalText.value = x; modalBg.classList.add("open"); }
-  function closeModal() { modalBg.classList.remove("open"); }
-  document.getElementById("modalClose").addEventListener("click", closeModal);
-  document.getElementById("modalDone").addEventListener("click", closeModal);
-  modalBg.addEventListener("click", function (e) { if (e.target === modalBg) closeModal(); });
-  document.getElementById("copyText").addEventListener("click", function () { modalText.select(); try { navigator.clipboard.writeText(modalText.value); } catch (e) { document.execCommand("copy"); } });
-  document.getElementById("summaryBtn").addEventListener("click", function () { openModal("Schedule", buildSummary()); });
+  // ---- actions ----
   document.getElementById("refreshBtn").addEventListener("click", function () { pullRemote(true); });
-
-  document.getElementById("exportBtn").addEventListener("click", function () {
-    var blob = new Blob([JSON.stringify({ coaches: state.coaches, blocks: state.blocks, updatedAt: state.updatedAt }, null, 2)], { type: "application/json" });
-    var a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "bpr-timetable.json"; a.click(); URL.revokeObjectURL(a.href);
+  document.getElementById("copyLinkBtn").addEventListener("click", function () {
+    var link = location.origin + location.pathname + "?view";
+    function done() { setStatus("Student link copied"); }
+    try { navigator.clipboard.writeText(link).then(done, function () { window.prompt("Student link (copy this):", link); }); }
+    catch (e) { window.prompt("Student link (copy this):", link); }
   });
-  document.getElementById("importBtn").addEventListener("click", function () { document.getElementById("importFile").click(); });
-  document.getElementById("importFile").addEventListener("change", function (e) {
-    var file = e.target.files[0]; if (!file) return; var reader = new FileReader();
-    reader.onload = function () { try { var data = JSON.parse(reader.result); if (!data.coaches || !data.blocks) throw 0; adopt(data); scheduleSave(); renderAll(); } catch (err) { alert("That file could not be read as a timetable."); } };
-    reader.readAsText(file); e.target.value = "";
-  });
-  document.getElementById("clearBtn").addEventListener("click", function () { if (!confirm("Clear every block? Coaches stay.")) return; state.blocks = {}; scheduleSave(); renderGrid(); renderCoaches(); });
 
   // ---- boot ----
   function renderAll() { tzSel.value = viewTz; renderCoaches(); renderGrid(); }
