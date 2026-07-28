@@ -20,14 +20,22 @@
   href below to your real WhatsApp group invite link
   (https://chat.whatsapp.com/xxxxxxxx).
 
-  Note on automation: this page gives every buyer the same
-  static group-invite link right after Stripe checkout, which is
-  the simplest working version of "automated." It does not
-  remove people if they later cancel their subscription, and it
-  does not generate a unique link per buyer. True automation
-  (auto-remove on churn, unique invite tracking) needs the
-  WhatsApp Business API wired to Stripe webhooks, which is a
-  separate build if you want it later.
+  Intended flow (Option A, no backend):
+  - Stripe collects the buyer's WhatsApp number at checkout
+    (phone field + a required "WhatsApp number" custom field).
+  - This page shows the group invite link after payment.
+  - The WhatsApp group has "Approve new participants" turned ON,
+    so a leaked link cannot get anyone in. An admin approves each
+    request only if the requesting number matches a paid customer.
+  - Churn removal is manual for now: Stripe shows who lapsed, an
+    admin removes them from the group.
+
+  Note: this page shows the same static invite link to everyone
+  who reaches it. The approval gate is what makes that safe. If
+  link leakage ever becomes a problem, add a small serverless
+  function that verifies the Stripe session before revealing the
+  link (payment-gated link). Full auto-remove on churn would need
+  the WhatsApp Business API or a managed platform, a separate build.
   ============================================================
 -->
 
@@ -35,17 +43,17 @@
   <div class="ty-card">
     <span class="eyebrow-line">PAYMENT CONFIRMED</span>
     <h1>You're in the community.</h1>
-    <p class="lede">One tap and you're inside the Blueprint Reloaded Community. Group coaching exercise calls run 5 times a week, drop your first message and say you're new.</p>
+    <p class="lede">You're one tap from the Blueprint Reloaded Community. Requests are approved by an admin, usually within a few hours, then you're in. Group coaching exercise calls run 5 times a week.</p>
 
-    <a class="btn btn-cta btn-block" href="https://chat.whatsapp.com/WHATSAPP_INVITE_PLACEHOLDER">Join the community</a>
+    <a class="btn btn-cta btn-block" href="https://chat.whatsapp.com/WHATSAPP_INVITE_PLACEHOLDER">Request to join the community</a>
 
     <ul class="ty-steps">
-      <li>1. Tap the button above to join.</li>
-      <li>2. Confirm you want to join the community.</li>
-      <li>3. Introduce yourself, the next call is coming up this week.</li>
+      <li>1. Tap the button above and request to join.</li>
+      <li>2. Request from the same WhatsApp number you entered at checkout. That is how we confirm your spot and approve you.</li>
+      <li>3. Once you're approved, say hello. The next call is coming up this week.</li>
     </ul>
 
-    <p class="hero-fineprint">Trouble joining? Reply to your Stripe receipt email and we'll get you added directly.</p>
+    <p class="hero-fineprint">Joined with a different number, or not approved within a day? Reply to your Stripe receipt email and we'll add you directly.</p>
   </div>
 </main>
 
