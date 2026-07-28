@@ -9,63 +9,52 @@
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --navy: #082c4b;
-    --navy-2: #06253f;
-    --accent: #ff7200;
-    --ink: #1f2a37;
-    --muted: #64748b;
-    --line: #e2e8f0;
-    --bg: #f1f5f9;
-    --card: #ffffff;
-    --font-head: "Oswald", system-ui, sans-serif;
-    --font-body: "Open Sans", system-ui, sans-serif;
+    --navy: #082c4b; --navy-2: #06253f; --accent: #ff7200;
+    --ink: #1f2a37; --muted: #64748b; --line: #e2e8f0; --bg: #f1f5f9; --card: #ffffff;
+    --font-head: "Oswald", system-ui, sans-serif; --font-body: "Open Sans", system-ui, sans-serif;
   }
   * { box-sizing: border-box; }
   body { margin: 0; font-family: var(--font-body); color: var(--ink); background: var(--bg); }
 
-  header.app {
-    background: var(--navy); color: #fff; padding: 16px 20px;
-    display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
-  }
+  header.app { background: var(--navy); color: #fff; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
   header.app h1 { font-family: var(--font-head); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-size: 1.35rem; margin: 0; }
   header.app h1 span { color: var(--accent); }
-  header.app .hint { color: rgba(255,255,255,0.75); font-size: 0.85rem; max-width: 520px; }
+  header.app .hint { color: rgba(255,255,255,0.75); font-size: 0.85rem; max-width: 560px; }
 
   .wrap { padding: 18px; max-width: 1500px; margin: 0 auto; }
 
-  .toolbar {
-    background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px;
-    display: flex; gap: 18px; flex-wrap: wrap; align-items: flex-end; margin-bottom: 16px;
-  }
+  .viewer-note { display: none; background: #0e8f82; color: #fff; border-radius: 10px; padding: 12px 16px; margin-bottom: 16px; font-weight: 700; font-size: 0.9rem; }
+  body.viewer .viewer-note { display: block; }
+  body.viewer .editor-only { display: none !important; }
+
+  .toolbar { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; display: flex; gap: 18px; flex-wrap: wrap; align-items: flex-end; margin-bottom: 16px; }
   .field { display: flex; flex-direction: column; gap: 5px; }
   .field label { font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
   select, input[type="text"] { font-family: var(--font-body); font-size: 0.9rem; padding: 8px 10px; border: 1px solid var(--line); border-radius: 7px; background: #fff; color: var(--ink); }
   select#tz { min-width: 260px; }
+  .status { font-size: 0.78rem; color: var(--muted); align-self: center; }
 
   .btn { font-family: var(--font-body); font-weight: 700; font-size: 0.85rem; padding: 8px 14px; border-radius: 7px; border: 1px solid var(--line); background: #fff; color: var(--ink); cursor: pointer; }
   .btn:hover { border-color: #cbd5e1; }
-  .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
   .btn.dark { background: var(--navy); border-color: var(--navy); color: #fff; }
   .btn.ghost { background: transparent; }
   .btn-row { display: flex; gap: 8px; flex-wrap: wrap; }
 
-  /* Coaches panel */
   .coaches { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; margin-bottom: 16px; }
   .coaches h2 { font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.04em; font-size: 0.95rem; margin: 0 0 12px; }
   .coach-list { display: flex; flex-wrap: wrap; gap: 10px; }
-  .coach {
-    display: flex; align-items: center; gap: 8px; border: 2px solid var(--line); border-radius: 999px;
-    padding: 5px 6px 5px 12px; background: #fff; cursor: pointer;
-  }
+  .coach { display: flex; align-items: center; gap: 8px; border: 2px solid var(--line); border-radius: 999px; padding: 5px 12px; background: #fff; }
+  .coach.editable { padding: 5px 6px 5px 12px; cursor: pointer; }
   .coach.active { border-color: var(--navy); box-shadow: 0 0 0 3px rgba(8,44,75,0.08); }
-  .coach .swatch { width: 16px; height: 16px; border-radius: 50%; border: none; padding: 0; cursor: pointer; }
+  .coach .swatch { width: 16px; height: 16px; border-radius: 50%; border: none; padding: 0; }
+  input.swatch { cursor: pointer; }
   .coach input.name { border: none; background: transparent; font-weight: 700; font-size: 0.88rem; width: 92px; padding: 2px 0; color: var(--ink); }
   .coach input.name:focus { outline: none; border-bottom: 1px solid var(--line); }
+  .coach .nametext { font-weight: 700; font-size: 0.88rem; }
   .coach .del { border: none; background: transparent; color: var(--muted); font-size: 1rem; cursor: pointer; line-height: 1; padding: 2px 4px; border-radius: 5px; }
   .coach .del:hover { background: #fee2e2; color: #b91c1c; }
   .coach .count { font-size: 0.72rem; color: var(--muted); font-weight: 700; background: #f1f5f9; border-radius: 999px; padding: 1px 7px; }
 
-  /* Grid */
   .grid-scroll { background: var(--card); border: 1px solid var(--line); border-radius: 10px; overflow: auto; max-height: 66vh; }
   .grid { display: grid; grid-template-columns: 64px repeat(7, minmax(96px, 1fr)); min-width: 760px; }
   .gc { border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
@@ -73,15 +62,15 @@
   .corner { position: sticky; top: 0; left: 0; z-index: 4; background: var(--navy-2); }
   .timecol { position: sticky; left: 0; z-index: 2; background: #f8fafc; color: var(--muted); font-size: 0.68rem; text-align: right; padding: 0 8px; height: 26px; line-height: 26px; font-variant-numeric: tabular-nums; }
   .timecol.hour { color: var(--ink); font-weight: 700; border-top: 1px solid var(--line); }
-  .cell { height: 26px; padding: 2px; display: flex; flex-wrap: wrap; gap: 2px; align-content: center; cursor: pointer; user-select: none; }
+  .cell { height: 26px; padding: 2px; display: flex; flex-wrap: wrap; gap: 2px; align-content: center; user-select: none; }
+  body:not(.viewer) .cell { cursor: pointer; }
   .cell.hour { border-top: 1px solid var(--line); }
-  .cell:hover { background: #f8fafc; }
+  body:not(.viewer) .cell:hover { background: #f8fafc; }
   .cell .dot { width: 12px; height: 12px; border-radius: 3px; }
   .cell .more { font-size: 0.6rem; color: var(--muted); font-weight: 700; }
 
   .legendnote { color: var(--muted); font-size: 0.8rem; margin: 14px 2px 0; line-height: 1.5; }
 
-  /* Summary modal */
   .modal-bg { position: fixed; inset: 0; background: rgba(8,44,75,0.5); display: none; align-items: center; justify-content: center; padding: 20px; z-index: 20; }
   .modal-bg.open { display: flex; }
   .modal { background: #fff; border-radius: 12px; max-width: 560px; width: 100%; max-height: 80vh; display: flex; flex-direction: column; overflow: hidden; }
@@ -92,10 +81,7 @@
   .modal .foot { padding: 12px 18px; border-top: 1px solid var(--line); display: flex; justify-content: flex-end; gap: 8px; }
   .x { border: none; background: transparent; color: #fff; font-size: 1.4rem; cursor: pointer; line-height: 1; }
 
-  @media (max-width: 640px) {
-    header.app h1 { font-size: 1.1rem; }
-    .toolbar { gap: 12px; }
-  }
+  @media (max-width: 640px) { header.app h1 { font-size: 1.1rem; } .toolbar { gap: 12px; } }
 </style>
 </head>
 <body>
@@ -103,37 +89,41 @@
 <header class="app">
   <div>
     <h1>BPR <span>Coach Timetable</span></h1>
-    <div class="hint">Click and drag to block the times the selected coach wants to host exercise calls. Switch the timezone to see every block converted live.</div>
+    <div class="hint">Coaches block the times they want to host exercise calls. Everyone can switch the timezone to see the schedule in their own time.</div>
   </div>
 </header>
 
 <div class="wrap">
+
+  <div class="viewer-note">Read-only view. Pick your timezone below to see the call schedule in your own time. Only coaches can change it.</div>
 
   <div class="toolbar">
     <div class="field">
       <label for="tz">View times in</label>
       <select id="tz"></select>
     </div>
-    <div class="field">
+    <div class="field editor-only">
       <label>Blocking for</label>
       <select id="activeCoach"></select>
     </div>
     <div class="field">
       <label>Actions</label>
       <div class="btn-row">
+        <button class="btn" id="refreshBtn">Refresh</button>
         <button class="btn" id="summaryBtn">Copy as text</button>
-        <button class="btn" id="exportBtn">Export</button>
-        <button class="btn" id="importBtn">Import</button>
-        <button class="btn ghost" id="clearBtn">Clear all</button>
+        <button class="btn editor-only" id="exportBtn">Export</button>
+        <button class="btn editor-only" id="importBtn">Import</button>
+        <button class="btn ghost editor-only" id="clearBtn">Clear all</button>
       </div>
     </div>
+    <div class="status" id="status"></div>
     <input type="file" id="importFile" accept="application/json" hidden />
   </div>
 
   <div class="coaches">
     <h2>Coaches</h2>
     <div class="coach-list" id="coachList"></div>
-    <div style="margin-top:12px"><button class="btn dark" id="addCoach">+ Add coach</button></div>
+    <div style="margin-top:12px" class="editor-only"><button class="btn dark" id="addCoach">+ Add coach</button></div>
   </div>
 
   <div class="grid-scroll">
@@ -141,8 +131,8 @@
   </div>
 
   <p class="legendnote">
-    Each cell is a 30-minute slot. Blocks are stored once and converted for whichever timezone you pick, so a coach sets availability in their own timezone and everyone else sees it in theirs.
-    Conversions use the current week, so around daylight-saving changes double-check the hour. Everything saves in this browser. Use Export to share the file or move it to another device.
+    Each cell is a 30-minute slot. Times are stored once and converted for whichever timezone you pick, so a coach sets availability in their own timezone and everyone else sees it in theirs.
+    Conversions use the current week, so around daylight-saving changes double-check the hour.
   </p>
 </div>
 
@@ -161,380 +151,284 @@
 (function () {
   "use strict";
 
+  // ============================================================
+  // Set BACKEND to your Cloudflare Worker URL to turn on the shared,
+  // live timetable (coaches edit, students view). Leave it "" to run
+  // as a local single-device tool.
+  // ============================================================
+  var BACKEND = "";
+
   var PALETTE = ["#ff7200","#0e8f82","#2f6fed","#7c4dff","#e6398b","#2fa84f","#f2a900","#e2453c","#00a7c4","#9b5de5"];
   var DAYS = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
   var WD = { Mon:0, Tue:1, Wed:2, Thu:3, Fri:4, Sat:5, Sun:6 };
-  var SLOTS = 48;               // 30-min slots per day
-  var WEEK_SLOTS = SLOTS * 7;   // 336
+  var SLOTS = 48, WEEK_SLOTS = SLOTS * 7;
   var STORE = "bpr_timetable_v1";
+
+  var VIEWER = /(?:^|[?&])view(?:=|&|$)/i.test(location.search) || location.hash.replace("#", "") === "view";
 
   function uid() { return Math.random().toString(36).slice(2, 9); }
   function guessTz() { try { return Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC"; } catch (e) { return "UTC"; } }
 
-  // ---- state ----
-  var state = load();
-  if (!state) {
-    state = {
-      coaches: [
+  // shared: coaches, blocks, updatedAt.  local only: viewTz, activeCoachId.
+  var state = { coaches: [], blocks: {}, updatedAt: 0 };
+  var viewTz = localStorage.getItem("bpr_tz") || guessTz();
+  var activeCoachId = sessionStorage.getItem("bpr_active") || null;
+  var coachKey = sessionStorage.getItem("bpr_coach_key") || null;
+  var lastEdit = 0, saveTimer = null;
+
+  function seedIfEmpty() {
+    if (!state.coaches || !state.coaches.length) {
+      state.coaches = [
         { id: uid(), name: "Coach 1", color: PALETTE[0] },
         { id: uid(), name: "Coach 2", color: PALETTE[1] }
-      ],
-      activeCoachId: null,
-      viewTz: guessTz(),
-      blocks: {}   // weeklySlot -> [coachId, ...]  (canonical, stored in UTC)
-    };
+      ];
+    }
+    if (!state.blocks) state.blocks = {};
+    if (!activeCoachId || !coachById(activeCoachId)) activeCoachId = state.coaches[0] ? state.coaches[0].id : null;
   }
-  if (!state.activeCoachId && state.coaches[0]) state.activeCoachId = state.coaches[0].id;
+  function coachById(id) { for (var i = 0; i < state.coaches.length; i++) if (state.coaches[i].id === id) return state.coaches[i]; return null; }
 
-  function save() { try { localStorage.setItem(STORE, JSON.stringify(state)); } catch (e) {} }
-  function load() { try { return JSON.parse(localStorage.getItem(STORE)); } catch (e) { return null; } }
+  function setStatus(t) { document.getElementById("status").textContent = t; }
+
+  // ---- persistence ----
+  function saveLocalPrefs() { try { localStorage.setItem("bpr_tz", viewTz); sessionStorage.setItem("bpr_active", activeCoachId || ""); } catch (e) {} }
+
+  function scheduleSave() {                       // call after any change to coaches/blocks
+    lastEdit = Date.now();
+    state.updatedAt = lastEdit;
+    if (!BACKEND) { try { localStorage.setItem(STORE, JSON.stringify(state)); } catch (e) {} setStatus("Saved"); return; }
+    clearTimeout(saveTimer); setStatus("Saving...");
+    saveTimer = setTimeout(pushRemote, 600);
+  }
+  function pushRemote() {
+    fetch(BACKEND, {
+      method: "POST",
+      headers: { "content-type": "application/json", "x-coach-key": coachKey || "" },
+      body: JSON.stringify({ coaches: state.coaches, blocks: state.blocks, updatedAt: state.updatedAt })
+    }).then(function (r) {
+      if (r.status === 401) { coachKey = null; sessionStorage.removeItem("bpr_coach_key"); setStatus("Wrong password"); alert("That coach password was not accepted. Reload the page and enter it again."); }
+      else setStatus("Saved");
+    }).catch(function () { setStatus("Offline, retrying on next change"); });
+  }
+
+  function adopt(data) {                           // bring in the shared coaches/blocks
+    state.coaches = data.coaches || [];
+    state.blocks = data.blocks || {};
+    state.updatedAt = data.updatedAt || 0;
+    seedIfEmpty();
+  }
+  function pullRemote(force) {
+    if (!BACKEND) { try { var l = JSON.parse(localStorage.getItem(STORE)); if (l) adopt(l); } catch (e) {} seedIfEmpty(); renderAll(); return; }
+    setStatus("Syncing...");
+    fetch(BACKEND, { cache: "no-store" }).then(function (r) { return r.json(); }).then(function (data) {
+      // Do not clobber a coach mid-edit unless forced (manual refresh).
+      var busy = document.activeElement && document.activeElement.tagName === "INPUT";
+      if (VIEWER || force || (!busy && Date.now() - lastEdit > 2500 && (data.updatedAt || 0) >= state.updatedAt)) {
+        adopt(data); renderAll();
+      }
+      setStatus(VIEWER ? "Up to date" : "Saved");
+    }).catch(function () { seedIfEmpty(); renderAll(); setStatus("Could not reach the server"); });
+  }
 
   // ---- timezone math ----
-  function parts(instant, tz) {
-    var dtf = new Intl.DateTimeFormat("en-US", {
-      timeZone: tz, hourCycle: "h23", weekday: "short",
-      year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit"
-    });
-    var o = {}, arr = dtf.formatToParts(instant), i;
-    for (i = 0; i < arr.length; i++) o[arr[i].type] = arr[i].value;
-    return o;
+  function parts(t, tz) {
+    var dtf = new Intl.DateTimeFormat("en-US", { timeZone: tz, hourCycle: "h23", weekday: "short", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" });
+    var o = {}, a = dtf.formatToParts(t), i; for (i = 0; i < a.length; i++) o[a[i].type] = a[i].value; return o;
   }
-
-  // Convert a wall-clock time in a timezone to a UTC instant (ms). Iterates to
-  // settle daylight-saving offsets.
   function wallToUtc(y, mo, d, h, mi, tz) {
-    var target = Date.UTC(y, mo - 1, d, h, mi), t = target, i, p, offset, nt;
-    for (i = 0; i < 4; i++) {
-      p = parts(t, tz);
-      offset = Date.UTC(+p.year, +p.month - 1, +p.day, +p.hour, +p.minute) - t; // tz offset at t
-      nt = target - offset;
-      if (nt === t) break;
-      t = nt;
-    }
+    var target = Date.UTC(y, mo - 1, d, h, mi), t = target, i, p, off, nt;
+    for (i = 0; i < 4; i++) { p = parts(t, tz); off = Date.UTC(+p.year, +p.month - 1, +p.day, +p.hour, +p.minute) - t; nt = target - off; if (nt === t) break; t = nt; }
     return t;
   }
-
-  // Monday 00:00 UTC of the current week, our fixed anchor for weekly slots.
   function refMondayUtc() {
-    var now = new Date();
-    var todayUtc = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
-    var dow = new Date(todayUtc).getUTCDay();     // 0 Sun .. 6 Sat
-    var sinceMon = (dow + 6) % 7;
-    return todayUtc - sinceMon * 86400000;
+    var now = new Date(), todayUtc = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
+    var dow = new Date(todayUtc).getUTCDay(); return todayUtc - ((dow + 6) % 7) * 86400000;
   }
   var REF = refMondayUtc();
-
-  // Monday's calendar date as seen in the view timezone this week.
   function viewMonday(tz) {
-    var p = parts(Date.now(), tz);
-    var day = WD[p.weekday];
-    var base = Date.UTC(+p.year, +p.month - 1, +p.day);
-    var mon = new Date(base - day * 86400000);
-    return { y: mon.getUTCFullYear(), mo: mon.getUTCMonth() + 1, d: mon.getUTCDate() };
+    var p = parts(Date.now(), tz), day = WD[p.weekday];
+    var m = new Date(Date.UTC(+p.year, +p.month - 1, +p.day) - day * 86400000);
+    return { y: m.getUTCFullYear(), mo: m.getUTCMonth() + 1, d: m.getUTCDate() };
   }
-
-  // A grid cell (day 0-6, slot 0-47) in the view tz -> canonical weekly slot (UTC).
   function cellToWeekly(day, slot, tz) {
-    var m = viewMonday(tz);
-    var dateMs = Date.UTC(m.y, m.mo - 1, m.d) + day * 86400000;
-    var dt = new Date(dateMs);
+    var m = viewMonday(tz), dt = new Date(Date.UTC(m.y, m.mo - 1, m.d) + day * 86400000);
     var h = Math.floor(slot / 2), mi = (slot % 2) * 30;
-    var instant = wallToUtc(dt.getUTCFullYear(), dt.getUTCMonth() + 1, dt.getUTCDate(), h, mi, tz);
-    var p = parts(instant, "UTC");
+    var inst = wallToUtc(dt.getUTCFullYear(), dt.getUTCMonth() + 1, dt.getUTCDate(), h, mi, tz);
+    var p = parts(inst, "UTC");
     var ws = WD[p.weekday] * SLOTS + (+p.hour) * 2 + ((+p.minute) >= 30 ? 1 : 0);
     return ((ws % WEEK_SLOTS) + WEEK_SLOTS) % WEEK_SLOTS;
   }
-
-  // Canonical weekly slot -> its position (day, slot) in the view tz.
   function weeklyToCell(ws, tz) {
-    var instant = REF + ws * 1800000;
-    var p = parts(instant, tz);
-    var day = WD[p.weekday];
+    var p = parts(REF + ws * 1800000, tz), day = WD[p.weekday];
     var slot = Math.round(((+p.hour) * 60 + (+p.minute)) / 30);
     if (slot >= SLOTS) { slot -= SLOTS; day = (day + 1) % 7; }
     return { day: day, slot: slot };
   }
 
-  function coachById(id) { for (var i = 0; i < state.coaches.length; i++) if (state.coaches[i].id === id) return state.coaches[i]; return null; }
-
-  // ---- build the grid once ----
-  var grid = document.getElementById("grid");
-  var cellMap = {};   // "day-slot" -> cell element
+  // ---- grid ----
+  var grid = document.getElementById("grid"), cellMap = {};
   function buildGrid() {
     grid.innerHTML = "";
-    var corner = document.createElement("div");
-    corner.className = "gc head corner";
-    corner.textContent = "";
-    grid.appendChild(corner);
+    var corner = document.createElement("div"); corner.className = "gc head corner"; grid.appendChild(corner);
     var d;
-    for (d = 0; d < 7; d++) {
-      var h = document.createElement("div");
-      h.className = "gc head";
-      h.textContent = DAYS[d];
-      grid.appendChild(h);
-    }
+    for (d = 0; d < 7; d++) { var h = document.createElement("div"); h.className = "gc head"; h.textContent = DAYS[d]; grid.appendChild(h); }
     var slot;
     for (slot = 0; slot < SLOTS; slot++) {
       var isHour = slot % 2 === 0;
-      var t = document.createElement("div");
-      t.className = "gc timecol" + (isHour ? " hour" : "");
+      var t = document.createElement("div"); t.className = "gc timecol" + (isHour ? " hour" : "");
       var hh = Math.floor(slot / 2), mm = (slot % 2) * 30;
-      t.textContent = (hh < 10 ? "0" + hh : hh) + ":" + (mm === 0 ? "00" : "30");
-      grid.appendChild(t);
+      t.textContent = (hh < 10 ? "0" + hh : hh) + ":" + (mm === 0 ? "00" : "30"); grid.appendChild(t);
       for (d = 0; d < 7; d++) {
-        var c = document.createElement("div");
-        c.className = "gc cell" + (isHour ? " hour" : "");
-        c.dataset.day = d;
-        c.dataset.slot = slot;
-        grid.appendChild(c);
-        cellMap[d + "-" + slot] = c;
+        var c = document.createElement("div"); c.className = "gc cell" + (isHour ? " hour" : "");
+        c.dataset.day = d; c.dataset.slot = slot; grid.appendChild(c); cellMap[d + "-" + slot] = c;
       }
     }
   }
-
   function paintCell(cell) {
-    var ws = +cell.dataset.ws;
-    var ids = state.blocks[ws] || [];
-    cell.innerHTML = "";
-    var shown = 0, i;
+    var ids = state.blocks[+cell.dataset.ws] || [], shown = 0, i; cell.innerHTML = "";
     for (i = 0; i < ids.length; i++) {
-      var coach = coachById(ids[i]);
-      if (!coach) continue;
-      if (shown < 6) {
-        var dot = document.createElement("span");
-        dot.className = "dot";
-        dot.style.background = coach.color;
-        dot.title = coach.name;
-        cell.appendChild(dot);
-      }
+      var coach = coachById(ids[i]); if (!coach) continue;
+      if (shown < 6) { var dot = document.createElement("span"); dot.className = "dot"; dot.style.background = coach.color; dot.title = coach.name; cell.appendChild(dot); }
       shown++;
     }
-    if (shown > 6) {
-      var more = document.createElement("span");
-      more.className = "more";
-      more.textContent = "+" + (shown - 6);
-      cell.appendChild(more);
-    }
+    if (shown > 6) { var more = document.createElement("span"); more.className = "more"; more.textContent = "+" + (shown - 6); cell.appendChild(more); }
   }
-
   function renderGrid() {
     var d, slot;
-    for (slot = 0; slot < SLOTS; slot++) {
-      for (d = 0; d < 7; d++) {
-        var cell = cellMap[d + "-" + slot];
-        cell.dataset.ws = cellToWeekly(d, slot, state.viewTz);
-        paintCell(cell);
-      }
+    for (slot = 0; slot < SLOTS; slot++) for (d = 0; d < 7; d++) {
+      var cell = cellMap[d + "-" + slot]; cell.dataset.ws = cellToWeekly(d, slot, viewTz); paintCell(cell);
     }
   }
 
-  // ---- drag painting ----
+  // ---- drag painting (editor only) ----
   var painting = false, paintMode = "add";
   function applyCell(cell) {
-    var ws = +cell.dataset.ws;
-    var id = state.activeCoachId;
-    if (!id) return;
-    var arr = state.blocks[ws] || [];
-    var idx = arr.indexOf(id);
+    var ws = +cell.dataset.ws, id = activeCoachId; if (!id) return;
+    var arr = state.blocks[ws] || [], idx = arr.indexOf(id);
     if (paintMode === "add" && idx === -1) arr.push(id);
     if (paintMode === "remove" && idx !== -1) arr.splice(idx, 1);
     if (arr.length) state.blocks[ws] = arr; else delete state.blocks[ws];
     paintCell(cell);
   }
   grid.addEventListener("pointerdown", function (e) {
-    var cell = e.target.closest(".cell");
-    if (!cell || !state.activeCoachId) return;
+    if (VIEWER) return;
+    var cell = e.target.closest(".cell"); if (!cell || !activeCoachId) return;
     e.preventDefault();
-    var ws = +cell.dataset.ws;
-    var arr = state.blocks[ws] || [];
-    paintMode = arr.indexOf(state.activeCoachId) === -1 ? "add" : "remove";
-    painting = true;
-    applyCell(cell);
+    var arr = state.blocks[+cell.dataset.ws] || [];
+    paintMode = arr.indexOf(activeCoachId) === -1 ? "add" : "remove";
+    painting = true; applyCell(cell);
   });
-  grid.addEventListener("pointerover", function (e) {
-    if (!painting) return;
-    var cell = e.target.closest(".cell");
-    if (cell) applyCell(cell);
-  });
-  window.addEventListener("pointerup", function () {
-    if (painting) { painting = false; save(); renderCoaches(); }
-  });
+  grid.addEventListener("pointerover", function (e) { if (!painting) return; var cell = e.target.closest(".cell"); if (cell) applyCell(cell); });
+  window.addEventListener("pointerup", function () { if (painting) { painting = false; scheduleSave(); renderCoaches(); } });
 
-  // ---- coaches UI ----
-  var coachList = document.getElementById("coachList");
-  var activeSel = document.getElementById("activeCoach");
-  function countFor(id) {
-    var n = 0, k;
-    for (k in state.blocks) if (state.blocks[k].indexOf(id) !== -1) n++;
-    return n;
-  }
+  // ---- coaches ----
+  var coachList = document.getElementById("coachList"), activeSel = document.getElementById("activeCoach");
+  function countFor(id) { var n = 0, k; for (k in state.blocks) if (state.blocks[k].indexOf(id) !== -1) n++; return n; }
   function renderCoaches() {
-    coachList.innerHTML = "";
-    activeSel.innerHTML = "";
+    coachList.innerHTML = ""; activeSel.innerHTML = "";
     state.coaches.forEach(function (coach) {
       var el = document.createElement("div");
-      el.className = "coach" + (coach.id === state.activeCoachId ? " active" : "");
-      el.addEventListener("click", function (e) {
-        if (e.target.closest("input,button")) return;
-        state.activeCoachId = coach.id; save(); renderCoaches();
-      });
+      var hrs = document.createElement("span"); hrs.className = "count"; hrs.textContent = (countFor(coach.id) / 2).toFixed(1).replace(".0", "") + "h";
 
-      var sw = document.createElement("input");
-      sw.type = "color"; sw.className = "swatch"; sw.value = coach.color;
-      sw.addEventListener("input", function () { coach.color = sw.value; save(); renderGrid(); renderCoaches(); });
-
-      var name = document.createElement("input");
-      name.type = "text"; name.className = "name"; name.value = coach.name;
-      name.addEventListener("change", function () { coach.name = name.value.trim() || "Coach"; save(); renderCoaches(); });
-
-      var cnt = document.createElement("span");
-      cnt.className = "count"; cnt.textContent = (countFor(coach.id) / 2).toFixed(1).replace(".0", "") + "h";
-
-      var del = document.createElement("button");
-      del.className = "del"; del.textContent = "×"; del.title = "Remove coach";
-      del.addEventListener("click", function () {
-        if (!confirm("Remove " + coach.name + " and all their blocks?")) return;
-        state.coaches = state.coaches.filter(function (c) { return c.id !== coach.id; });
-        var k;
-        for (k in state.blocks) {
-          state.blocks[k] = state.blocks[k].filter(function (x) { return x !== coach.id; });
-          if (!state.blocks[k].length) delete state.blocks[k];
-        }
-        if (state.activeCoachId === coach.id) state.activeCoachId = state.coaches[0] ? state.coaches[0].id : null;
-        save(); renderCoaches(); renderGrid();
-      });
-
-      el.appendChild(sw); el.appendChild(name); el.appendChild(cnt); el.appendChild(del);
+      if (VIEWER) {
+        el.className = "coach";
+        var sw = document.createElement("span"); sw.className = "swatch"; sw.style.background = coach.color;
+        var nm = document.createElement("span"); nm.className = "nametext"; nm.textContent = coach.name;
+        el.appendChild(sw); el.appendChild(nm); el.appendChild(hrs);
+      } else {
+        el.className = "coach editable" + (coach.id === activeCoachId ? " active" : "");
+        el.addEventListener("click", function (e) { if (e.target.closest("input,button")) return; activeCoachId = coach.id; saveLocalPrefs(); renderCoaches(); });
+        var sw2 = document.createElement("input"); sw2.type = "color"; sw2.className = "swatch"; sw2.value = coach.color;
+        sw2.addEventListener("input", function () { coach.color = sw2.value; scheduleSave(); renderGrid(); });
+        var nm2 = document.createElement("input"); nm2.type = "text"; nm2.className = "name"; nm2.value = coach.name;
+        nm2.addEventListener("change", function () { coach.name = nm2.value.trim() || "Coach"; scheduleSave(); renderCoaches(); });
+        var del = document.createElement("button"); del.className = "del"; del.textContent = "×"; del.title = "Remove coach";
+        del.addEventListener("click", function () {
+          if (!confirm("Remove " + coach.name + " and all their blocks?")) return;
+          state.coaches = state.coaches.filter(function (c) { return c.id !== coach.id; });
+          var k; for (k in state.blocks) { state.blocks[k] = state.blocks[k].filter(function (x) { return x !== coach.id; }); if (!state.blocks[k].length) delete state.blocks[k]; }
+          if (activeCoachId === coach.id) activeCoachId = state.coaches[0] ? state.coaches[0].id : null;
+          scheduleSave(); renderCoaches(); renderGrid();
+        });
+        el.appendChild(sw2); el.appendChild(nm2); el.appendChild(hrs); el.appendChild(del);
+      }
       coachList.appendChild(el);
 
-      var opt = document.createElement("option");
-      opt.value = coach.id; opt.textContent = coach.name;
-      if (coach.id === state.activeCoachId) opt.selected = true;
-      activeSel.appendChild(opt);
+      var opt = document.createElement("option"); opt.value = coach.id; opt.textContent = coach.name;
+      if (coach.id === activeCoachId) opt.selected = true; activeSel.appendChild(opt);
     });
   }
-  activeSel.addEventListener("change", function () { state.activeCoachId = activeSel.value; save(); renderCoaches(); });
-
+  activeSel.addEventListener("change", function () { activeCoachId = activeSel.value; saveLocalPrefs(); renderCoaches(); });
   document.getElementById("addCoach").addEventListener("click", function () {
-    var color = PALETTE[state.coaches.length % PALETTE.length];
-    var coach = { id: uid(), name: "Coach " + (state.coaches.length + 1), color: color };
-    state.coaches.push(coach);
-    state.activeCoachId = coach.id;
-    save(); renderCoaches();
+    var coach = { id: uid(), name: "Coach " + (state.coaches.length + 1), color: PALETTE[state.coaches.length % PALETTE.length] };
+    state.coaches.push(coach); activeCoachId = coach.id; saveLocalPrefs(); scheduleSave(); renderCoaches();
   });
 
   // ---- timezone select ----
   var tzSel = document.getElementById("tz");
   function buildTz() {
-    var zones = [];
-    try { if (Intl.supportedValuesOf) zones = Intl.supportedValuesOf("timeZone"); } catch (e) {}
-    if (!zones.length) {
-      zones = ["UTC","Europe/London","Europe/Berlin","Africa/Johannesburg","America/New_York","America/Chicago",
-               "America/Denver","America/Los_Angeles","America/Sao_Paulo","Asia/Dubai","Asia/Kolkata",
-               "Asia/Singapore","Asia/Tokyo","Australia/Sydney","Pacific/Auckland"];
-    }
-    var local = guessTz();
-    var pinned = [local, "UTC", "Europe/London", "America/New_York", "America/Los_Angeles"];
+    var zones = []; try { if (Intl.supportedValuesOf) zones = Intl.supportedValuesOf("timeZone"); } catch (e) {}
+    if (!zones.length) zones = ["UTC","Europe/London","Europe/Berlin","Africa/Johannesburg","America/New_York","America/Chicago","America/Denver","America/Los_Angeles","America/Sao_Paulo","Asia/Dubai","Asia/Kolkata","Asia/Singapore","Asia/Tokyo","Australia/Sydney","Pacific/Auckland"];
+    var local = guessTz(), pinned = [local, "UTC", "Europe/London", "America/New_York", "America/Los_Angeles"];
     function add(z, label) { var o = document.createElement("option"); o.value = z; o.textContent = label || z.replace(/_/g, " "); tzSel.appendChild(o); }
     pinned.forEach(function (z, i) { if (zones.indexOf(z) !== -1 || z === local) add(z, (i === 0 ? "Your timezone: " : "") + z.replace(/_/g, " ")); });
-    var divider = document.createElement("option"); divider.disabled = true; divider.textContent = "──────────"; tzSel.appendChild(divider);
+    var div = document.createElement("option"); div.disabled = true; div.textContent = "----------"; tzSel.appendChild(div);
     zones.forEach(function (z) { add(z); });
-    tzSel.value = state.viewTz;
+    tzSel.value = viewTz;
   }
-  tzSel.addEventListener("change", function () { state.viewTz = tzSel.value; save(); renderGrid(); });
+  tzSel.addEventListener("change", function () { viewTz = tzSel.value; saveLocalPrefs(); renderGrid(); });
 
   // ---- summary / export / import ----
   function buildSummary() {
-    var tz = state.viewTz;
-    // Map every canonical block into view-tz cells first.
-    var byDayCoach = {};   // day -> coachId -> [slots]
-    var k, i;
+    var byDay = {}, k, i;
     for (k in state.blocks) {
-      var ws = +k, pos = weeklyToCell(ws, tz), ids = state.blocks[k];
-      for (i = 0; i < ids.length; i++) {
-        byDayCoach[pos.day] = byDayCoach[pos.day] || {};
-        byDayCoach[pos.day][ids[i]] = byDayCoach[pos.day][ids[i]] || [];
-        byDayCoach[pos.day][ids[i]].push(pos.slot);
-      }
+      var pos = weeklyToCell(+k, viewTz), ids = state.blocks[k];
+      for (i = 0; i < ids.length; i++) { byDay[pos.day] = byDay[pos.day] || {}; (byDay[pos.day][ids[i]] = byDay[pos.day][ids[i]] || []).push(pos.slot); }
     }
-    function fmt(slot) { var h = Math.floor(slot / 2), m = (slot % 2) * 30; return (h < 10 ? "0" + h : h) + ":" + (m === 0 ? "00" : "30"); }
-    function ranges(slots) {
-      slots.sort(function (a, b) { return a - b; });
-      var out = [], start = slots[0], prev = slots[0], j;
-      for (j = 1; j < slots.length; j++) {
-        if (slots[j] === prev + 1) { prev = slots[j]; continue; }
-        out.push(fmt(start) + "-" + fmt(prev + 1)); start = prev = slots[j];
-      }
-      out.push(fmt(start) + "-" + fmt(prev + 1));
-      return out;
-    }
-    var lines = ["BPR exercise call availability", "Times in " + tz.replace(/_/g, " "), ""];
-    var d;
-    for (d = 0; d < 7; d++) {
-      var dc = byDayCoach[d];
-      if (!dc) continue;
-      lines.push(DAYS[d]);
-      state.coaches.forEach(function (coach) {
-        if (!dc[coach.id]) return;
-        lines.push("  " + coach.name + ": " + ranges(dc[coach.id]).join(", "));
-      });
-      lines.push("");
-    }
-    if (lines.length === 3) lines.push("(no blocks yet)");
+    function fmt(s) { var h = Math.floor(s / 2), m = (s % 2) * 30; return (h < 10 ? "0" + h : h) + ":" + (m === 0 ? "00" : "30"); }
+    function ranges(slots) { slots.sort(function (a, b) { return a - b; }); var out = [], st = slots[0], pv = slots[0], j; for (j = 1; j < slots.length; j++) { if (slots[j] === pv + 1) { pv = slots[j]; continue; } out.push(fmt(st) + "-" + fmt(pv + 1)); st = pv = slots[j]; } out.push(fmt(st) + "-" + fmt(pv + 1)); return out; }
+    var lines = ["BPR exercise call schedule", "Times in " + viewTz.replace(/_/g, " "), ""], d;
+    for (d = 0; d < 7; d++) { if (!byDay[d]) continue; lines.push(DAYS[d]); state.coaches.forEach(function (c) { if (byDay[d][c.id]) lines.push("  " + c.name + ": " + ranges(byDay[d][c.id]).join(", ")); }); lines.push(""); }
+    if (lines.length === 3) lines.push("(no calls scheduled yet)");
     return lines.join("\n");
   }
-
-  var modalBg = document.getElementById("modalBg"),
-      modalText = document.getElementById("modalText"),
-      modalTitle = document.getElementById("modalTitle");
-  function openModal(title, text) { modalTitle.textContent = title; modalText.value = text; modalBg.classList.add("open"); }
+  var modalBg = document.getElementById("modalBg"), modalText = document.getElementById("modalText"), modalTitle = document.getElementById("modalTitle");
+  function openModal(t, x) { modalTitle.textContent = t; modalText.value = x; modalBg.classList.add("open"); }
   function closeModal() { modalBg.classList.remove("open"); }
   document.getElementById("modalClose").addEventListener("click", closeModal);
   document.getElementById("modalDone").addEventListener("click", closeModal);
   modalBg.addEventListener("click", function (e) { if (e.target === modalBg) closeModal(); });
-  document.getElementById("copyText").addEventListener("click", function () {
-    modalText.select();
-    try { navigator.clipboard.writeText(modalText.value); } catch (e) { document.execCommand("copy"); }
-  });
-
-  document.getElementById("summaryBtn").addEventListener("click", function () { openModal("Schedule (paste into Schedule/links)", buildSummary()); });
+  document.getElementById("copyText").addEventListener("click", function () { modalText.select(); try { navigator.clipboard.writeText(modalText.value); } catch (e) { document.execCommand("copy"); } });
+  document.getElementById("summaryBtn").addEventListener("click", function () { openModal("Schedule", buildSummary()); });
+  document.getElementById("refreshBtn").addEventListener("click", function () { pullRemote(true); });
 
   document.getElementById("exportBtn").addEventListener("click", function () {
-    var blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
-    var a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = "bpr-timetable.json";
-    a.click();
-    URL.revokeObjectURL(a.href);
+    var blob = new Blob([JSON.stringify({ coaches: state.coaches, blocks: state.blocks, updatedAt: state.updatedAt }, null, 2)], { type: "application/json" });
+    var a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "bpr-timetable.json"; a.click(); URL.revokeObjectURL(a.href);
   });
   document.getElementById("importBtn").addEventListener("click", function () { document.getElementById("importFile").click(); });
   document.getElementById("importFile").addEventListener("change", function (e) {
-    var file = e.target.files[0]; if (!file) return;
-    var reader = new FileReader();
-    reader.onload = function () {
-      try {
-        var data = JSON.parse(reader.result);
-        if (!data.coaches || !data.blocks) throw new Error("bad file");
-        state = data;
-        if (!state.viewTz) state.viewTz = guessTz();
-        if (!state.activeCoachId && state.coaches[0]) state.activeCoachId = state.coaches[0].id;
-        save(); tzSel.value = state.viewTz; renderCoaches(); renderGrid();
-      } catch (err) { alert("That file could not be read as a timetable."); }
-    };
-    reader.readAsText(file);
-    e.target.value = "";
+    var file = e.target.files[0]; if (!file) return; var reader = new FileReader();
+    reader.onload = function () { try { var data = JSON.parse(reader.result); if (!data.coaches || !data.blocks) throw 0; adopt(data); scheduleSave(); renderAll(); } catch (err) { alert("That file could not be read as a timetable."); } };
+    reader.readAsText(file); e.target.value = "";
   });
+  document.getElementById("clearBtn").addEventListener("click", function () { if (!confirm("Clear every block? Coaches stay.")) return; state.blocks = {}; scheduleSave(); renderGrid(); renderCoaches(); });
 
-  document.getElementById("clearBtn").addEventListener("click", function () {
-    if (!confirm("Clear every block from the timetable? Coaches stay.")) return;
-    state.blocks = {}; save(); renderGrid(); renderCoaches();
-  });
-
-  // ---- go ----
-  buildGrid();
-  buildTz();
-  renderCoaches();
-  renderGrid();
+  // ---- boot ----
+  function renderAll() { tzSel.value = viewTz; renderCoaches(); renderGrid(); }
+  function boot() {
+    document.body.classList.toggle("viewer", VIEWER);
+    buildGrid(); buildTz();
+    if (BACKEND && !VIEWER) {
+      if (!coachKey) { coachKey = (window.prompt("Enter the coach password to edit the timetable:") || "").trim(); if (coachKey) sessionStorage.setItem("bpr_coach_key", coachKey); }
+    }
+    pullRemote(true);
+    if (BACKEND) {
+      if (!VIEWER) setInterval(function () { pullRemote(false); }, 15000);
+      document.addEventListener("visibilitychange", function () { if (!document.hidden) pullRemote(VIEWER ? true : false); });
+    }
+  }
+  boot();
 })();
 </script>
 </body>
