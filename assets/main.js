@@ -1,22 +1,41 @@
 document.documentElement.classList.add("js");
 
-// Countdown: rolls to 11:59:59 PM on the last day of the current month, in
-// the visitor's local timezone. Automatically re-targets the next month once
-// the current one passes, so the "closes end of month" offer never shows 00.
-function endOfMonth() {
-  const now = new Date();
-  let end = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59);
-  if (end - now <= 0) end = new Date(now.getFullYear(), now.getMonth() + 2, 0, 23, 59, 59);
-  return end;
+// Evergreen urgency countdown. Each visitor gets their own deadline, set on
+// their first visit and saved locally, so the timer always shows a live,
+// shrinking window that creates urgency and never sits at zero. It needs no
+// server and no upkeep, and keeps working on any domain and any date, so it
+// carries over unchanged when the site moves to the final domain.
+//
+// URGENCY_HOURS sets the size of the window. 48 = counts down from just under
+// 2 days. Change this one number to widen or tighten the window.
+const URGENCY_HOURS = 48;
+
+function armDeadline() {
+  const next = Date.now() + URGENCY_HOURS * 3600 * 1000;
+  try { localStorage.setItem("bpr_deadline", String(next)); } catch (e) {}
+  return next;
 }
-const DEADLINE = endOfMonth();
+
+function getDeadline() {
+  let stored = NaN;
+  try { stored = parseInt(localStorage.getItem("bpr_deadline"), 10); } catch (e) {}
+  // Reuse a saved deadline while it is still in the future; otherwise arm a
+  // fresh one. This makes the clock loop instead of ever running out.
+  if (stored && stored > Date.now()) return stored;
+  return armDeadline();
+}
+
+let DEADLINE = getDeadline();
 
 function updateCountdown() {
   const daysEl = document.getElementById("cd-days");
   if (!daysEl) return;
-  const now = new Date();
-  let diff = DEADLINE - now;
-  if (diff < 0) diff = 0;
+  let diff = DEADLINE - Date.now();
+  if (diff <= 0) {
+    // Window elapsed: arm a new one so the countdown never shows all zeros.
+    DEADLINE = armDeadline();
+    diff = DEADLINE - Date.now();
+  }
   const pad = (n) => String(n).padStart(2, "0");
   const days = Math.floor(diff / 86400000);
   const hours = Math.floor((diff % 86400000) / 3600000);
