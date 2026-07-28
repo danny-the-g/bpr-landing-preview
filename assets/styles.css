@@ -431,3 +431,6 @@ footer p { color: var(--muted-inverse); font-size: 0.85rem; margin: 0; }
 .ty-steps li { margin-bottom: 8px; }
 .ty-steps li:last-child { margin-bottom: 0; }
 .ty-card .hero-fineprint { color: var(--muted-inverse); }
+.ty-bonus { margin: 0 0 28px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.14); }
+.ty-bonus-label { font-family: var(--font-body); font-weight: 800; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin: 0 0 8px; }
+.ty-bonus-text { color: var(--muted-inverse); line-height: 1.6; margin: 0; font-size: 0.95rem; }
